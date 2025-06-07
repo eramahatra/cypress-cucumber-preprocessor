@@ -36,6 +36,11 @@ function prepareJsonReport(tree: any) {
       node.duration = 0;
     } else if (hasOwnProperty(node, "uri") && typeof node.uri === "string") {
       node.uri = node.uri.replace(/\\/g, "/");
+    } else if (
+      hasOwnProperty(node, "location") &&
+      typeof node.location === "string"
+    ) {
+      node.location = node.location.replace(/\\/g, "/");
     }
   }
 
