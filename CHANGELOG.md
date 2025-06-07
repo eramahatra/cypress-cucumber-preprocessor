@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## v22.1.0
 
 - Gracefully handle sourcemaps when running component tests with webpack and chunks enabled (default behavior), fixes [#1296](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1296).
 
