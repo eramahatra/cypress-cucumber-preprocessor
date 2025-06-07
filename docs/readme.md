@@ -1,8 +1,7 @@
 # Documentation
 
 * [Quick start](quick-start.md)
-* [Base project examples](../examples/) (configuration, setup, etc.)
-* [Documented examples](./examples) (solutions to issues, etc.)
+* [Project examples](../examples/)
 * [Cucumber basics](cucumber-basics.md)
 * [State management](state-management.md)
 * [Step definitions](step-definitions.md)
@@ -25,3 +24,7 @@
 * [Mixing Cucumber and non-Cucumber specs](mixing-types.md)
 * [:warning: On event handlers](event-handlers.md)
 * [Frequently asked questions](faq.md)
+
+## User-provided code examples
+
+* [Handling multiple Cypress configurations with distinct step definition directories](examples/handling-multiple-configurations.md)
