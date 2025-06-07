@@ -24,4 +24,4 @@ Feature: HTML report
       """
     When I run cypress
     Then it passes
-    And the HTML report should display 1 "skipped" scenario
+    And the HTML report should display 1 "skipped" step
