@@ -101,17 +101,17 @@ export function cachedCreateSourceMapConsumer(
 export function maybeRetrievePositionFromSourceMap(): Position | undefined {
   const stack = ErrorStackParser.parse(new Error());
 
-  if (stack[0].fileName == null) {
+  const relevantFrame = stack[3];
+
+  if (relevantFrame.fileName == null) {
     return;
   }
 
-  const sourceMap = cachedCreateSourceMapConsumer(stack[0].fileName);
+  const sourceMap = cachedCreateSourceMapConsumer(relevantFrame.fileName);
 
   if (!sourceMap) {
     return;
   }
-
-  const relevantFrame = stack[3];
 
   const position = sourceMap.originalPositionFor({
     line: relevantFrame.getLineNumber()!,
