@@ -1,4 +1,4 @@
-# https://github.com/badeball/cypress-cucumber-preprocessor/issues/1034
+# https://github.com/badeball/cypress-cucumber-preprocessor/issues/1041
 
 Feature: HTML report
   Scenario: skipped test
