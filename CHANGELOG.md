@@ -6,6 +6,20 @@ All notable changes to this project will be documented in this file.
 
 - Gracefully handle sourcemaps when running component tests with webpack and chunks enabled (default behavior), fixes [#1296](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1296).
 
+- Avoid setting `sourcesContent: false` to esbuild when using the [`prettySourceMap` option](docs/source-maps.md), relates to [#1285](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1285).
+
+  - This means that the default bundle when using `prettySourceMap` is larger and *may* affect performance. However, the in-app experience is likely more aligned with user expectation. Users can disable this behavior by explicitly configuring `sourcesContent: false` themselves, as shown below.
+
+    ```js
+    on(
+      "file:preprocessor",
+      createBundler({
+        sourcesContent: false,
+        plugins: [createEsbuildPlugin(config, { prettySourceMap: true })],
+      })
+    );
+    ```
+
 ## v22.0.1
 
 - Import types-only from `@cucumber/messages`, fixes [#1273](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1273).

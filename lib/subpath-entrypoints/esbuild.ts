@@ -24,7 +24,6 @@ export function createEsbuildPlugin(
     setup(build) {
       if (options.prettySourceMap) {
         build.initialOptions.sourcemap = "external";
-        build.initialOptions.sourcesContent = false;
 
         build.onEnd(async () => {
           const outfile = assertAndReturn(
