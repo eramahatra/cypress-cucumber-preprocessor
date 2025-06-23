@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## v22.2.0
 
 - Add TypeScript support for custom world in hooks, fixes [#1304](https://github.com/badeball/cypress-cucumber-preprocessor/issues/1304).
 
