@@ -602,6 +602,7 @@ export async function afterSpecHandler(
     case "test-finished": // This is the normal case.
     case "before-spec": // This can happen if a spec doesn't contain any tests.
     case "received-envelopes": // This can happen in case of a failing beforeEach hook.
+    case "step-started": // This can happen when a test step starts but doesn't finish properly.
       break;
     default:
       throw createError("Unexpected state in afterSpecHandler: " + state.state);
@@ -637,6 +638,22 @@ export async function afterSpecHandler(
         pretty: state.pretty,
         messages: {
           accumulation: state.messages.accumulation,
+        },
+      };
+    } else if (state.state === "step-started") {
+      // The spec had tests but a step didn't finish properly.
+      console.log(
+        chalk.yellow(
+          `  Step didn't finish properly in ${spec.relative}, including partial messages.`,
+        ),
+      );
+      state = {
+        state: "after-spec",
+        pretty: state.pretty,
+        messages: {
+          accumulation: state.messages.accumulation.concat(
+            state.messages.current,
+          ),
         },
       };
     } else {
@@ -913,10 +930,18 @@ export async function testStepFinishedHandler(
     "Expected to find a testCase",
   );
 
-  const { pickleStepId, hookId } = assertAndReturn(
-    testCase.testSteps.find((testStep) => testStep.id === testStepId),
-    "Expected to find a testStep",
+  const testStep = testCase.testSteps.find(
+    (testStep) => testStep.id === testStepId,
   );
+  if (!testStep) {
+    console.log(
+      chalk.yellow(
+        `  TestStep with id ${testStepId} not found, skipping step finished handler.`,
+      ),
+    );
+    return true;
+  }
+  const { pickleStepId, hookId } = testStep;
 
   if (pickleStepId != null) {
     const pickle = assertAndReturn(
